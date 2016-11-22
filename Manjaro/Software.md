@@ -1,7 +1,9 @@
 ## Shadowsocks-Qt5
-- Exec commond: ss-qt5
+- Install: yaourt -S shadowsocks-qt5
+- Exec: ss-qt5
 
 ## ProxyChains
+- Install: pacman -S proxychains
 
 ## google-chrome-stable -http_proxy="socks://127.0.0.1:1080"
 
