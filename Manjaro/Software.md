@@ -6,6 +6,6 @@
 ## google-chrome-stable -http_proxy="socks://127.0.0.1:1080"
 
 ## xfce-theme-manager
-http://www.deviantart.com/
+- http://www.deviantart.com/
 
-https://www.gnome-look.org/browse/ord/latest/
+- https://www.gnome-look.org/browse/ord/latest/
