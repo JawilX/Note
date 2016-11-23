@@ -5,7 +5,7 @@
 ## ProxyChains
 - Install: pacman -S proxychains
 
-## google-chrome-stable -http_proxy="socks://127.0.0.1:1080"
+## google-chrome-stable --proxy-server="socks://127.0.0.1:1080"
 
 ## xfce-theme-manager
 - http://www.deviantart.com/
