@@ -9,6 +9,6 @@
     - Main menu | Code | Reformat Code: (Ctrl+Alt+L -> Ctrl+Shift+F)
     - Main menu | Edit | Find | Find in Path...: (Ctrl+Shift+F -> Alt+F)
     - Editor Actions | Delete Line: (Ctrl+Y -> Ctrl+D)
-    - Editor Actions | Duplicate Line or Selection: (Ctrl+D -> Ctrl+向下箭头）
-    - Main menu | Code | Move Line Up: (Alt+Shift+向上箭头 -> Ctrl+Shift+向上箭头)
-    - Main menu | Code | Move Line Down: (Alt+Shift+向下箭头 -> Ctrl+Shift+向下箭头)
+    - Editor Actions | Duplicate Line or Selection: (Ctrl+D -> Ctrl+向下箭头)
+    - Main menu | Code | Move Line Up: (Alt+Shift+向上箭头 -> Ctrl+Shift+向上箭头)
+    - Main menu | Code | Move Line Down: (Alt+Shift+向下箭头 -> Ctrl+Shift+向下箭头)
