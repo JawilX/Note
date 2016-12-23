@@ -1,3 +1,6 @@
+## update aur packages
+- yaourt -Syu --aur
+
 ## Shadowsocks-Qt5
 - Install: yaourt -S shadowsocks-qt5
 - Exec: ss-qt5
