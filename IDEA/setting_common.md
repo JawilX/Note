@@ -1,8 +1,10 @@
 - Editor -> General -> Code Completion: (Case sensitive completion: None)
+
+                    -> Smart Keys: Use "CameHumps" words
 - Editor -> Colors & Fonts 
     - -> Font: (Save as: Mine), (Primary font: Consolas), (Size: 18)
-    - -> General -> Text -> Default text: (Background: #C7EDCC)
-    - -> Console Font: (Size: 16)
+     - -> General -> Text -> Default text: (Background: #C7EDCC)
+     - -> Console Font: (Size: 16)
 
 - Keymap:
     - Default copy to Mine
