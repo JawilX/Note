@@ -6,7 +6,9 @@ compile('com.foo:FOO:1.0.0@aar') {
 }
 ```
 
-#### 上面方式不行就只能上传到JCenter或者private maven repo
+#### 上面方式不行就只能上传到JCenter或者maven repo
+
+#### 下面这是上传到private maven repo的方法
 
 https://inthecheesefactory.com/blog/how-to-setup-private-maven-repository/en
 
