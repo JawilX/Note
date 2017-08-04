@@ -52,3 +52,5 @@ publishing {
     }
 }
 ```
+
+#### gradle build --refresh-dependencies
