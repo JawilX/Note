@@ -54,3 +54,85 @@ publishing {
 ```
 
 #### gradle build --refresh-dependencies
+
+#### 3. 生成fatjar
+```gradle
+    task createJar(type: Jar) {
+        from {
+            List<File> allFiles = new ArrayList<>();
+            configurations.compile.collect {
+                for (File f : zipTree(it).getFiles()) {
+                    if (f.getName().equals("classes.jar")) {
+                        allFiles.addAll(zipTree(f).getAt("asFileTrees").get(0).getDir())
+                    }
+                }
+            }
+            allFiles.add(new File('build/intermediates/classes/debug'))
+            allFiles // To return the result inside a lambda
+        }
+        archiveName('Trivisa.jar')
+    }
+```
+错误:
+```
+Error:Execution failed for task ':app:transformClassesWithDexForDebug'.
+> com.android.build.api.transform.TransformException: com.android.ide.common.process.ProcessException: java.util.concurrent.ExecutionException: com.android.dex.DexException: Multiple dex files define Landroid/support/v7/app/ActionBar$DisplayOptions;
+```
+
+#### 4. 生成fataar
+```gradle
+    task sync_jars() << {
+        //把所有依赖的.jar库都拷贝到build/aar/libs下
+        copy {
+            into buildDir.getPath() +"/aar/libs"
+            from configurations.compile.findAll {
+                it.getName().endsWith(".jar")
+            }
+        }
+    }
+    task sync_aars(dependsOn:':lib:assembleRelease') << {
+        //把所有依赖的.aar库里包含的classes.jar都拷贝到build/aar/libs下，并重命名以不被覆盖
+        def jar_name
+        def aar_path
+        def dest_dir = buildDir.getPath()+"/aar"
+        configurations.compile.findAll {
+            it.getName().endsWith(".aar")
+        }.collect {
+            aar_path = it.getPath()
+            jar_name = "libs/"+it.getName().replace(".aar",".jar")
+            copy {
+                from zipTree(aar_path)
+                into dest_dir
+                include "**/*"
+                rename 'classes.jar', jar_name
+            }
+        }
+    }
+    task fataar(dependsOn:[sync_aars, sync_jars]) << {
+        /*task (obfuse_classes_jar, type: proguard.gradle.ProGuardTask) {
+            //把build/aar/libs*//*.jar混淆后生成build/aar/classes.jar
+            configuration "proguard.cfg"
+            injars buildDir.getPath()+"/aar/libs"
+            outjars buildDir.getPath()+"/aar/classes.jar"
+            libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
+            libraryjars "${System.getProperty('java.home')}/Contents/Classes/classes.jar"
+            libraryjars System.getenv("ANDROID_HOME")+"/platforms/android-26/android.jar"
+        }.execute()*/
+        task (gen_aar, type: Zip) {
+            //把生成最终的aar包，注意libs目录需要被排除
+            def dest_dir = buildDir.getPath()+"/aar/"
+            baseName = "Trivisa"
+            extension = "aar"
+            destinationDir = file(buildDir.getPath())
+            from dest_dir
+            exclude "libs"
+        }.execute()
+    }
+```
+错误:
+```
+Error:Execution failed for task ':app:processDebugManifest'.
+> Manifest merger failed : Attribute meta-data#android.support.VERSION@value value=(26.0.0-alpha1) from [com.android.support:appcompat-v7:26.0.0-alpha1] AndroidManifest.xml:27:9-38
+  	is also present at [:Trivisa:] AndroidManifest.xml:27:9-31 value=(25.3.1).
+  	Suggestion: add 'tools:replace="android:value"' to <meta-data> element at AndroidManifest.xml:25:5-27:41 to override.
+```
