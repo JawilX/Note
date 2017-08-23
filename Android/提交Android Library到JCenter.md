@@ -72,9 +72,9 @@ dependencies {
 }
 
 version = "1.0.0"                                        // #CONFIG# // project version
-def siteUrl = ''  // #CONFIG# // project homepage 可以为空
-def gitUrl = ''   // #CONFIG# // project git url 可以为空
-def issueUrl = '' // #CONFIG# // project issue url 可以为空
+def siteUrl = 'siteUrl'  // #CONFIG# // project homepage 可以为空
+def gitUrl = 'gitUrl'   // #CONFIG# // project git url
+def issueUrl = 'issueUrl' // #CONFIG# // project issue url 可以为空
 group = "com.geartech.gcordsdk"  // #CONFIG# // Maven Group ID for the artifact (pageckage name is ok)
 
 
