@@ -155,7 +155,7 @@ bintray {
 }
 ```
 
-## 3. 上传到Bintray
+## 3. 上传到Bintray, 需要科学上网
 
 选择工具栏中的`Sync projects with Gradle files`对项目进行重建, 点开AS的Terminal, 默认在当前项目路径下, 执行`./gradlew bintrayUpload`命令, 第一次可能需要下载gradle, 在上传的过程中一般会在97%卡住一会, 如果卡住时间过长, 可以Ctrl+C结束命令再重试
 
