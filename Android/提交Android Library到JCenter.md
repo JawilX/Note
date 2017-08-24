@@ -167,4 +167,9 @@ bintray {
 
 ## 5. 注意
 
-关联JCenter后如果想删除这个项目, 可以点这个项目页面下面的`Edit`, 然后先点Version List删除所有的版本, 然后在点Package Details删除这个项目, 这样能删除对应JCenter里面的包, 不然如果直接删除当前项目, JCenter里面的包会一直存在, 这个时候你如果想要再创建相同项目名或者相同GroupID的项目就会提示已经存在, 这个时候唯一的办法就是在Bintray下面搜索到这个项目证明你是它的creator, 如果审核通过, 这个项目就会重新回到你当前账号的maven包下.
+- 关联JCenter后如果想删除这个项目, 可以点这个项目页面下面的`Edit`, 然后先点Version List删除所有的版本, 然后在点Package Details删除这个项目, 这样能删除对应JCenter里面的包, 不然如果直接删除当前项目, JCenter里面的包会一直存在, 这个时候你如果想要再创建相同项目名或者相同GroupID的项目就会提示已经存在, 这个时候唯一的办法就是在Bintray下面搜索到这个项目证明你是它的creator, 如果审核通过, 这个项目就会重新回到你当前账号的maven包下.
+- 如果删掉之前的版本后再上传新的版本会报错
+   ```
+   * What went wrong: Execution failed for task ':trivisa:bintrayUpload'. > Could not publish    'ecreditpal/maven/trivisa/1.0.0': HTTP/1.1 404 Not Found [message:Version '1.0.0' was not found]
+   ```
+   页面会显示有一个新的版本, 但是jcenter不会同步
