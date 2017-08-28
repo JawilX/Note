@@ -5,4 +5,3 @@
 - .s3.amazonaws.com/
 - .stackoverflow.com/
 - .python.org/
-- .starbuzzcoffee.com/
