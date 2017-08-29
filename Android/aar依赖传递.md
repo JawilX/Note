@@ -1,6 +1,6 @@
 #### 1. 依赖传递, aar默认不引入arr的依赖，但会自动引入jar的依赖
 
-```gradle
+```groovy
 compile('com.foo:FOO:1.0.0@aar') {
        transitive = true
 }
@@ -30,7 +30,7 @@ https://jeroenmols.com/blog/2015/08/13/artifactory2/
 2、该pom文件内是否有添加dependencies项
 ```
 
-```gradle
+```groovy
 publishing {
     publications {
         aar(MavenPublication) {
@@ -56,8 +56,9 @@ publishing {
 #### gradle build --refresh-dependencies
 
 #### 3. 生成fatjar
-```gradle
-    task createJar(type: Jar) {
+- 方法一
+```groovy
+    task createJar(type: Jar) {
         from {
             List<File> allFiles = new ArrayList<>();
             configurations.compile.collect {
@@ -78,9 +79,36 @@ publishing {
 Error:Execution failed for task ':app:transformClassesWithDexForDebug'.
 > com.android.build.api.transform.TransformException: com.android.ide.common.process.ProcessException: java.util.concurrent.ExecutionException: com.android.dex.DexException: Multiple dex files define Landroid/support/v7/app/ActionBar$DisplayOptions;
 ```
+- 方法二
+```groovy
+android.libraryVariants.all { variant ->
+    def name = variant.buildType.name
+    if (name.equals(com.android.builder.core.BuilderConstants.DEBUG)) {
+        return; // Skip debug builds.
+    }
+    def task = project.tasks.create "jar${name.capitalize()}", Jar
+    task.dependsOn variant.javaCompile
+    //Include Java classes
+    task.from variant.javaCompile.destinationDir
+    //Include dependent jars with some exceptions
+    task.from configurations.compile.findAll {
+        it.getName() != 'android.jar' && !it.getName().startsWith('junit') && !it.getName().startsWith('hamcrest')
+    }.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }
+    artifacts.add('archives', task);
+}
+
+运行jarRelease
+```
+错误:
+```
+Error:Execution failed for task ':app:transformClassesWithDexForDebug'.
+> com.android.build.api.transform.TransformException: com.android.ide.common.process.ProcessException: java.util.concurrent.ExecutionException: com.android.dex.DexException: Multiple dex files define Landroid/support/annotation/AnimRes;
+```
 
 #### 4. 生成fataar
-```gradle
+```groovy
     task sync_jars() << {
         //把所有依赖的.jar库都拷贝到build/aar/libs下
         copy {
