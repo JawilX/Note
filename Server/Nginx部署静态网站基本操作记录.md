@@ -24,10 +24,10 @@ vim /var/log/nginx/error.log
         listen       443 ssl http2 default_server;
         listen       [::]:443 ssl http2 default_server;
         server_name  _;
-        root         /var/www/html/website;
+        root         /var/www/html/YOUR-PROJECT-NAME;
 
-        ssl_certificate "/etc/letsencrypt/live/www.domain.com/cert.pem";
-        ssl_certificate_key "/etc/letsencrypt/live/www.domain.com/privkey.pem";
+        ssl_certificate "/etc/letsencrypt/live/www.YOUR-DOMAIN.com/cert.pem";
+        ssl_certificate_key "/etc/letsencrypt/live/www.YOUR-DOMAIN.com/privkey.pem";
         ssl_session_cache shared:SSL:1m;
         ssl_session_timeout  10m;
         ssl_ciphers HIGH:!aNULL:!MD5;
