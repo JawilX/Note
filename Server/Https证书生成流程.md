@@ -5,7 +5,7 @@
     ```
     vim /etc/cron.weekly/update-letsencrypt.sh
     ```
-    - 在文件中输入一下内容
+    - 在文件中输入以下内容
     ```
     #!/bin/bash
 
