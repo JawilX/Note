@@ -2,6 +2,7 @@
 - .sourceforge.net/
 - .w3schools.com/
 - .github.com/
+- .gitbooks.io/
 - .s3.amazonaws.com/
 - .stackoverflow.com/
 - .python.org/
