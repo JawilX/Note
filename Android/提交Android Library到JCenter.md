@@ -4,7 +4,7 @@
 * 登陆后在首页右上角点击用户名选项下的Edit Profile, 然后点击左下角的API Key, 这里一般需要再次提交一次密码, 然后右边的图标可以复制这个API Key
 * 点击首页的`Add New Repository  `按下图填写并Create
 
-![image](https://github.com/xuuuu/Pictures/blob/master/bintray_create_maven_repository.png?raw=true)
+![image](https://github.com/xuuuu/pic/blob/master/bintray_create_maven_repository.png?raw=true)
 
 ## 2. 项目配置
 
